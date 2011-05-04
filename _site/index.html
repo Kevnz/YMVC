@@ -14,6 +14,8 @@
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssbase/base-min.css">
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssfonts/fonts-min.css">
 		<script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script> 
+		<script type="text/javascript" src="/scripts/model.js"></script>
+		<script type="text/javascript" src="/scripts/template-widget.js"></script>	
 	</head>
 	<!--[if lt IE 7 ]><body class="ie6 yui3-skin-sam"><![endif]-->
 	<!--[if IE 7 ]><body class="ie7 yui3-skin-sam yui-skin-sam"><![endif]-->
@@ -28,7 +30,8 @@
  
 		
 		<script>
-		YUI().use('base', 'console','substitute', function(Y){
+		YUI().use('ymvc-template-widget','ymvc-model','base', function(Y){
+			/*
 			new Y.Console().render();
 			var TestModel = Y.Base.create('TestModel', Y.Base, [], {
 				initializer:function(){
@@ -63,8 +66,7 @@
 					syncUI:function(){
 						Y.log('syncUI');
 					}
-				},
-				{
+				},{
 					ATTRS: {
 						template:{value:'{title}<br /><a href="#" id="{id}">edit</a>'},
 						model:{value:null}
@@ -72,25 +74,12 @@
 				}
 				
 			);
-			
-			
-			var TestController = Y.Base.create('TestController', Y.Base, [], 
-				{
-					initializer: function(){
-						
-					}
-				},{
-					ATTRS: {
-						routes: {//?
-							value:null
-						}
-					}
-				});
+			*/
 			Y.on('domready', function(){
 				var myModel = new Y.Model({title:'test', id:1234 });
 				Y.log(myModel);
 				Y.log(myModel.get('title'));
-				var myWidget = new TemplatedWidget({srcNode:'#test-container', model : myModel });
+				var myWidget = new Y.TemplatedWidget({srcNode:'#test-container', model : myModel });
 				myWidget.render();
 				
 			});

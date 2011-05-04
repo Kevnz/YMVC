@@ -12,7 +12,7 @@ YUI.add('ymvc-template-widget', function(Y){
 					Y.log('click');
 					Y.log(e.currentTarget);
 					e.preventDefault();							
-				})
+				});
 			},
 			syncUI:function(){
 				Y.log('syncUI');
@@ -23,9 +23,7 @@ YUI.add('ymvc-template-widget', function(Y){
 				template:{value:'{title}<br /><a href="#" id="{id}">edit</a>'},
 				model:{value:null}
 			}
-		}
-		
-		Y.namespace('ymvc').TemplatedWidget = TemplatedWidget;
-	);
+		});
+		Y.TemplatedWidget = TemplatedWidget;
 			
 },  '0.0.1', {requires:['widget', 'substitute']});

@@ -5,8 +5,7 @@ YUI.add('ymvc-model', function(Y){
 				Y.log('in the initializer','info', 'ymvc-model');
 			},
 			toJson: function(){
-				
-				return { this.getAttrs(); };
+				return   this.getAttrs(); 
 			},
 			
 		},{
@@ -16,7 +15,8 @@ YUI.add('ymvc-model', function(Y){
 			}
 		}
 	);
-	
+    Y.Model = Model;
+
 	
 			
 },  '0.0.1', {requires:['base', 'substitute']});
