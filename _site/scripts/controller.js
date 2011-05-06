@@ -1,4 +1,4 @@
-YUI.add('ymvc-model', function(Y){
+YUI.add('ymvc-controller', function(Y){
 	
 	var Controller = Y.Base.create('Controller', Y.Base, [], {
 			initializer:function(){
