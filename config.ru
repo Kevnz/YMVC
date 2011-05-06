@@ -1,3 +1,3 @@
-require 'unleashed'
+require 'static'
 
 run Sinatra::Application
