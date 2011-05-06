@@ -30,51 +30,10 @@
  
 		
 		<script>
-		YUI().use('ymvc-template-widget','ymvc-model','base', function(Y){
-			/*
-			new Y.Console().render();
-			var TestModel = Y.Base.create('TestModel', Y.Base, [], {
-				initializer:function(){
-					Y.log('in the initializer');
-				},
-				toJson: function(){
-					
-					return { title: this.get('title'), id: this.get('id'), description: this.get('description'), author:this.get('author') };
-				}
-			},{
-				ATTRS :{
-					title:{value:null},id:{value:null},description:{value:null},author:{value:null}
-				}
-				
-			});
+		YUI().use('ymvc-template-widget','ymvc-model','ymvc-controller','base', function(Y){
 			
+			var controller = new Y.Controller({});
 			
-			var TestWidget = Y.Base.create('TestWidget', Y.Widget, [], {
-					renderUI : function(){
-						Y.log('renderUI');
-						this.get('contentBox').set('innerHTML', Y.substitute(this.get('template'), this.get('model').toJson()) );
-					},
-					bindUI: function(){
-						Y.log('bindUI');						
-						var link = this.get('contentBox').one('a');
-						link.on('click', function(e){
-							Y.log('click');
-							Y.log(e.currentTarget);
-							e.preventDefault();							
-						})
-					},
-					syncUI:function(){
-						Y.log('syncUI');
-					}
-				},{
-					ATTRS: {
-						template:{value:'{title}<br /><a href="#" id="{id}">edit</a>'},
-						model:{value:null}
-					}
-				}
-				
-			);
-			*/
 			Y.on('domready', function(){
 				var myModel = new Y.Model({title:'test', id:1234 });
 				Y.log(myModel);

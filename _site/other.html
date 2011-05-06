@@ -1,0 +1,59 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <title>YMVC - YUI 3 and the MVC Pattern</title>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssbase/base-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssfonts/fonts-min.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script>  
+	
+</head>
+<body>
+	<div id="test"> </div> 
+	<div id="book"> </div> 
+	
+<script>
+var load_config = {debug: true, filter : "debug"} 
+YUI( ).use('node', 'base', 'widget', 'console', function(Y){ 
+	Y.on('domready',
+	function(e){
+		 var TestModel = Y.Base.create('testmodel', Y.Base, [ ] , { 
+		 	initializer: function(){ Y.log('in initializer'); }, 
+		 	save:function(){ Y.log('save ' + this); }, 
+		 	add: function(props){ for (var i = props.length - 1; i >= 0; i--){ this.addAttr( props[i], {value:null}); }; },
+		 	toJson: function(){ return this.getAttrs(); } 
+		 },
+		 { 
+		 	ATTRS: { title: { value: 'default' }, id: { value: 0 } } 
+		 	
+	 	 }); 
+	var TemplatedWidget = Y.Base.create('template-widget', Y.Widget, [], { initialiser: function(){ }, syncUI: function(){ }, renderUI: function(){ var content = this.get('contentBox'); 
+	var template = this.get('template'); 
+	var model = this.get('model'); content.set('innerHTML',Y.substitute(template, model.toJson()) ); } }, { ATTRS: { template:{value: ''}, model: {value:null} } } ) 
+	
+	var TestModelView = Y.Base.create('testmodelview', Y.Widget, [ ] , { initializer: function(){ Y.log('in initializer'); } }, { ATTRS: { model: { value: null } } } ); 
+	var myModel = new TestModel({title:'instance'}); 
+	Y.log(myModel); Y.log(myModel.get('title'));
+	 
+	Y.log(myModel.get('id')); 
+	Y.log('Not added anything model.get' + myModel.get('slappy')); 
+	myModel.add(['slappy', 'description']); 
+	Y.log('add called and now model.get ' + myModel.get('slappy')); 
+	myModel.set('slappy', 'Kapow'); myModel.set('description', 'This is my description');
+	Y.log('after set ' + myModel.get('slappy')); 
+	Y.log(myModel.getAttrs()); 
+	var widget = new TemplatedWidget({srcNode:'#test', model: myModel, template:'<h1>{title}</h1><span>{description}</span>'}); 
+	widget.render(); 
+	
+//okay, that was cute, now let's whip up a model and template on the fly 
+var book = new TestModel({title:'JavaScript: The Good Parts'}); 
+book.add(['author', 'isbn', 'rating', 'url', 'description']); 
+book.set('author', 'Douglas Crockford'); 
+book.set('isbn', '0596517742'); 
+book.set('url', 'http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742'); 
+book.set('rating', 'Awesome'); 
+book.set('description', 'Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that is more reliable, readable, and maintainable than the language as a whole-a subset you can use to create truly extensible and efficient code.');
+ var bookWidget = new TemplatedWidget({srcNode:'#book', model: book, template:'<h1>{title}</h1><div><h2>By: {author} </h2><span>{description}</span><br /><a href="{url}">Amazon</a><br /> {rating} <br />'}); 
+ bookWidget.render();
+  }); 
+ }); 
+</script> 
+</body> 
+</html>
