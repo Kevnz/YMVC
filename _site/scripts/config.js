@@ -1,16 +1,18 @@
 var ymvc_Config = {
-	modules: {
-		'ymvc-model' :{
-			fullpath: '/scripts/model.js',
-			requires:['base', 'substitute']
-		},
-		'ymvc-controller' : {
-			fullpath: '/scripts/controller.js',
-			requires:['base', 'substitute']
-		},
-		'ymvc-template-widget': {
-			fullpath: '/scripts/template-widget.js',
-			requires:['widget', 'substitute']
+	
+	
+	groups : {
+			ymvc : {
+				base : 'http://ymvc.dev/scripts/',
+				root : '/scripts/', 
+				patterns: {
+					'ymvc-' : {
+						configFn : function( me ) {
+							me.path = me.name.replace (/ymvc-/g, "") + '.js'
+						}
+					}
+				}
+			}
 		}
-	}
+
 };

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>title</title>
-		<meta name="description" content="">
+		<meta name="description" content="Page that contains How the api for using YMVC should look">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
@@ -19,5 +19,31 @@
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="yui3-skin-sam yui-skin-sam"><!--<![endif]-->
 		<header> </header>
 		<footer> </footer>
+		
+		<script>
+			YUI(ymvc_Config).use('ymvc-template-widget','ymvc-model','ymvc-controller','base','console', function(Y){
+				new Y.Console().render();
+			//collection sample
+			var items = new Y.Collection({model:Y.Models.ToDo, url:'/data/todos'});
+			items.load();
+			
+			//ToDo Controller extends Controller
+			var controller = new Y.ToDoController({data:todos, widget:Y.Widgets.ToDos});
+			
+			
+			controller.index();
+			
+			
+			Y.on('domready', function(){
+				var myModel = new Y.Model({title:'test', id:1234 });
+				Y.log(myModel);
+				Y.log(myModel.get('title'));
+				var myWidget = new Y.TemplatedWidget({srcNode:'#test-container', model : myModel });
+				myWidget.render();
+				
+			});
+		});
+		
+		</script>
 	</body>
 </html>

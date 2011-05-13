@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>title</title>
-		<meta name="description" content="">
+		<title>YMVC Collections Test</title>
+		<meta name="description" content="Page for testing YMVC Collections">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
@@ -19,5 +19,30 @@
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="yui3-skin-sam yui-skin-sam"><!--<![endif]-->
 		<header> </header>
 		<footer> </footer>
+		
+		<script>
+			YUI(ymvc_Config).use('ymvc-model','ymvc-collection','base','console', function(Y){
+				new Y.Console().render();
+				
+				
+				var collection = new Y.Collection({model:Y.Model, url:'/data/models'});
+				
+				Y.log(collection);
+				
+				
+				
+				var model =  new Y.Model({title:'Test', id: 1}) ;
+			 
+			 
+				//var todo = new ToDoModel();
+				Y.log(model);
+				//collection sample
+
+			
+			
+ 
+		});
+		
+		</script>
 	</body>
 </html>
