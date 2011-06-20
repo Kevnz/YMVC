@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>title</title>
-		<meta name="description" content="Page that contains How the api for using YMVC should look">
+		<title>ToDo Model Test</title>
+		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css">
@@ -17,35 +17,27 @@
 	<!--[if IE 8 ]><body class="ie8 yui3-skin-sam yui-skin-sam"><![endif]-->
 	<!--[if IE 9 ]><body class="ie9 yui3-skin-sam yui-skin-sam"><![endif]-->
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="yui3-skin-sam yui-skin-sam"><!--<![endif]-->
-		<header> </header>
+		<header> <h1>ToDo Model</h1></header>
+		<div id="content">
+			
+		</div>
 		<footer> </footer>
 		
 		<script>
-			YUI(ymvc_Config).use('ymvc-template-widget','ymvc-model','ymvc-controller','base','console', function(Y){
-				new Y.Console().render();
-			//collection sample
-			var items = new Y.Collection({model:Y.Models.ToDo, url:'/data/todos'});
-			items.load();
-			
-			//A Controller would fetch the data
-			//But would it? Why not have a generic controller that you pass the widget and data to
-			// The controller would then stick the two together. 
-			var controller = new Y.Controller({data:items, widget: MyWidgetClass});
-			
-			
-			controller.index();
-			
-			
-			Y.on('domready', function(){
-				var myModel = new Y.Model({title:'test', id:1234 });
-				Y.log(myModel);
-				Y.log(myModel.get('title'));
-				var myWidget = new Y.TemplatedWidget({srcNode:'#test-container', model : myModel });
-				myWidget.render();
+			YUI(ymvc_Config).use('node', 'ymvc-model', 'app-model-todo', function(Y){
+				var todo = new Y.App.Models.ToDo({title:'ToDo Test', id : 1, description: 'ToDo Model to test'});
+				Y.log(todo);
+				Y.log(todo.toJson());
 				
+				var todoToo = new Y.App.Models.ToDo({url:'/data/todo/',  id:2 });
+				Y.log(todoToo.get('title'));
+				var todo3 = new Y.App.Models.ToDo({url:'/data/todo/'});
+				
+				todo3.set('title', 'from the page');
+				todo3.set('description', 'My Effort at posting back and saving');
+				todo3.save();
+				Y.log(todo3.toJson());
 			});
-		});
-		
 		</script>
 	</body>
 </html>
